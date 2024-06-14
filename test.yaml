@@ -7,8 +7,7 @@ contents:
     - wolfi-base
     - bash
     - coreutils
-
-cmd: /bin/sh -l
+    - systemd
 
 archs:
 - x86_64
