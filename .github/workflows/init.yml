@@ -11,3 +11,17 @@ jobs:
     - name: DoSomething
       run: |
         docker pull cgr.dev/chainguard/apko
+        docker run --rm -v ${PWD}:/work -w /work cgr.dev/chainguard/apko build-minirootfs test.yaml rootfs.tgz
+        mkdir rootfs
+        sudo tar xzf rootfs.tgz -C rootfs
+        sudo /sbin/mkfs.ext4 -L root -d ./rootfs/ rootfs.ext4 2G
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v4.3.3
+      with:
+        name: disk-image
+        path: rootfs.ext4
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v4.3.3
+      with:
+        name: rootfs.tgz
+        path: rootfs.tgz
