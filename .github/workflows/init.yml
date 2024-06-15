@@ -15,6 +15,7 @@ jobs:
         mkdir rootfs
         sudo tar xzf rootfs.tgz -C rootfs
         sudo /sbin/mkfs.ext4 -L root -d ./rootfs/ rootfs.ext4 2G
+    - run: tree rootfs
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.3.3
       with:
