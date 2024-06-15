@@ -8,6 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - run: |
+        wget https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.33.tar.xz
+        tar xf linux-6.6.33.tar.xz
+        cd linux-6.6.33
+        yes "" | make localmodconfig
+        make -j $(nproc --all)
+        ls
     - name: DoSomething
       run: |
         docker pull cgr.dev/chainguard/apko
