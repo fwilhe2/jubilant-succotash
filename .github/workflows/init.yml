@@ -9,6 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - run: |
+        sudo apt-get -y install apt-utils bc binutils bison build-essential ca-certificates cscope debhelper dwarves flex gcc git libelf-dev libncurses-dev libssl-dev linux-config-6.6 linux-source make openssl pahole perl-base pkg-config python-is-python3 rsync
         wget https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.33.tar.xz
         tar xf linux-6.6.33.tar.xz
         cd linux-6.6.33
@@ -22,7 +23,6 @@ jobs:
         mkdir rootfs
         sudo tar xzf rootfs.tgz -C rootfs
         sudo /sbin/mkfs.ext4 -L root -d ./rootfs/ rootfs.ext4 2G
-    - run: tree rootfs
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.3.3
       with:
